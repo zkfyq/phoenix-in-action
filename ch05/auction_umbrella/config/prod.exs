@@ -10,10 +10,10 @@ use Mix.Config
 # which you should run after static files are built and
 # before starting your production server.
 config :auction_web, AuctionWeb.Endpoint,
-       http: [port: 8000],
+  http: [port: 8000],
   url: [host: "localhost", port: 8000],
   cache_static_manifest: "priv/static/cache_manifest.json",
-server: true
+  server: true
 
 # ## SSL Support
 #

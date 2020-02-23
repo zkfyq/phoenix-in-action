@@ -46,6 +46,7 @@ defmodule AuctionWeb.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_ecto, "~> 4.1.0"},
       {:timex, "~> 3.6.1"},
+      {:plug_response_header, "~> 0.2.1"},
       {:auction, in_umbrella: true}
     ]
   end

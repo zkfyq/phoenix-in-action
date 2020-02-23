@@ -16,11 +16,27 @@ defmodule AuctionWeb.Router do
       }
     )
 
+    plug PlugResponseHeader,
+      delete: "x-request-id",
+      server: "unknown",
+      set: [
+        "strict-transport-security": "max-age=31536000",
+        "cache-control": "max-age=0, private, must-revalidate, no-transform"
+      ]
+
     plug(AuctionWeb.Authenticator)
   end
 
   pipeline :api do
     plug(:accepts, ["json"])
+
+    plug PlugResponseHeader,
+      delete: "x-request-id",
+      server: "unknown",
+      set: [
+        "strict-transport-security": "max-age=31536000",
+        "cache-control": "max-age=0, private, must-revalidate, no-transform"
+      ]
   end
 
   scope "/", AuctionWeb do
@@ -40,7 +56,9 @@ defmodule AuctionWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", AuctionWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", AuctionWeb.Api do
+    pipe_through :api
+
+    resources "/items", ItemController, only: [:index, :show]
+  end
 end
