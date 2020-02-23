@@ -5,7 +5,11 @@ defmodule Auction do
   @repo Repo
 
   def list_items do
-    @repo.all(Item)
+    query =
+      from(i in Item,
+        order_by: [asc: :id]
+      )
+    @repo.all(query)
   end
 
   def get_item(id) do
